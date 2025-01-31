@@ -336,6 +336,11 @@ else:
         extra_compile_args.append("-UNDEBUG")
         extra_compile_args.append("-O0")
 
+# Specify same X/Open requirement as Python's pyconfig.h.
+# (Required for some esoteric build configurations.)
+if is_platform_linux():
+    extra_compile_args.append("-D_XOPEN_SOURCE=700")
+
 # Build for at least macOS 10.9 when compiling on a 10.9 system or above,
 # overriding CPython distuitls behaviour which is to target the version that
 # python was built for. This may be overridden by setting
